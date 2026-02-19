@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Looper - Loop Video 8 Detik ke 30 Menit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔁 Video Looper</h1>
+        <p class="subtitle">Loop video pendek (8 detik) menjadi video 30 menit</p>
+
+        <div class="upload-section">
+            <label for="videoInput" class="upload-label">
+                <span class="upload-icon">📁</span>
+                <span>Pilih Video (maks 8 detik)</span>
+            </label>
+            <input type="file" id="videoInput" accept="video/*" hidden>
+            <p id="fileName" class="file-name"></p>
+        </div>
+
+        <div id="videoPreview" class="video-preview" hidden>
+            <video id="sourceVideo" controls></video>
+            <div class="video-info">
+                <p>Durasi video: <span id="videoDuration">-</span> detik</p>
+                <p>Jumlah loop: <span id="loopCount">-</span> kali</p>
+                <p>Durasi target: <span id="targetDuration">30</span> menit</p>
+            </div>
+        </div>
+
+        <div class="settings">
+            <label for="targetMinutes">Durasi target (menit):</label>
+            <input type="number" id="targetMinutes" value="30" min="1" max="60" step="1">
+        </div>
+
+        <div class="controls">
+            <button id="startBtn" disabled>▶️ Mulai Loop & Rekam</button>
+            <button id="stopBtn" disabled>⏹️ Berhenti</button>
+        </div>
+
+        <div id="progressSection" class="progress-section" hidden>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p class="progress-text">
+                <span id="currentTime">00:00</span> / <span id="totalTime">30:00</span>
+                (<span id="currentLoop">0</span> / <span id="totalLoops">0</span> loop)
+            </p>
+        </div>
+
+        <div id="recordingCanvas" hidden>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div id="resultSection" class="result-section" hidden>
+            <h2>✅ Video Selesai!</h2>
+            <video id="resultVideo" controls></video>
+            <a id="downloadBtn" class="download-btn" download="video-looped-30min.webm">
+                ⬇️ Download Video
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
