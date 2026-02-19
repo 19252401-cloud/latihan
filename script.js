@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         sourceVideo.currentTime = 0;
         sourceVideo.loop = true;
+        // Mute playback to prevent echo; audio is captured via MediaElementSource below
         sourceVideo.muted = true;
 
         const stream = canvas.captureStream(30);
@@ -145,13 +146,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getPreferredMimeType() {
-        var types = [
+        const types = [
             'video/webm;codecs=vp9',
             'video/webm;codecs=vp8',
             'video/webm',
             'video/mp4'
         ];
-        for (var i = 0; i < types.length; i++) {
+        for (let i = 0; i < types.length; i++) {
             if (MediaRecorder.isTypeSupported(types[i])) {
                 return types[i];
             }
@@ -182,10 +183,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         ctx.drawImage(sourceVideo, 0, 0, canvas.width, canvas.height);
 
-        var elapsed = getElapsed();
+        const elapsed = getElapsed();
         currentTimeEl.textContent = formatTime(elapsed);
 
-        var progress = Math.min((elapsed / targetSeconds) * 100, 100);
+        const progress = Math.min((elapsed / targetSeconds) * 100, 100);
         progressFill.style.width = progress + '%';
 
         if (elapsed >= targetSeconds) {
@@ -220,8 +221,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function formatTime(seconds) {
-        var mins = Math.floor(seconds / 60);
-        var secs = Math.floor(seconds % 60);
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
         return pad(mins) + ':' + pad(secs);
     }
 
